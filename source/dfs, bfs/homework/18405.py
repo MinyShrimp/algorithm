@@ -35,13 +35,13 @@ def bfs(grid, graph, visited, N, S):
                 for x, y in zip(dx, dy):
                     _x = p[0] + x
                     _y = p[1] + y
-
+                    # 보드를 넘어간 경우 패스
                     if _x < 0 or _x >= N or _y < 0 or _y >= N:
                         continue
-
+                    # 이미 방문한 경우 패스
                     if visited[_y][_x] == 1:
                         continue
-
+                    # 큐에 넣기
                     visited[_y][_x] = 1
                     grid[_y][_x] = i + 1
                     tmp_queue.append([_x, _y])
@@ -54,6 +54,11 @@ def solution():
 
     visited = [ [0] * N for _ in range(N) ]
     graph = [ deque() for _ in range(K) ]
+
+    # graph 배열
+    # [0] => [ [0, 0] ]
+    # [1] => [ [2, 0] ]
+    # [2] => [ [0, 2] ]
     for i in range(N):
         for j in range(N):
             if grid[i][j] != 0:
@@ -62,6 +67,7 @@ def solution():
 
     bfs(grid, graph, visited, N, S)
 
-    return grid[Y - 1][X - 1]
+    # return grid[Y - 1][X - 1]
+    return grid[X - 1][Y - 1]
 
 print( solution() )
